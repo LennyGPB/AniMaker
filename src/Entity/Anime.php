@@ -42,9 +42,13 @@ class Anime
     #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'anime')]
     private Collection $categories;
 
+    #[ORM\ManyToMany(targetEntity: StudioDanimation::class, mappedBy: 'Anime')]
+    private Collection $studioDanimations;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->studioDanimations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -170,6 +174,33 @@ class Anime
     {
         if ($this->categories->removeElement($category)) {
             $category->removeAnime($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, StudioDanimation>
+     */
+    public function getStudioDanimations(): Collection
+    {
+        return $this->studioDanimations;
+    }
+
+    public function addStudioDanimation(StudioDanimation $studioDanimation): static
+    {
+        if (!$this->studioDanimations->contains($studioDanimation)) {
+            $this->studioDanimations->add($studioDanimation);
+            $studioDanimation->addAnime($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStudioDanimation(StudioDanimation $studioDanimation): static
+    {
+        if ($this->studioDanimations->removeElement($studioDanimation)) {
+            $studioDanimation->removeAnime($this);
         }
 
         return $this;
