@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StudioAnimationController!{% endblock %}
+{% block title %}Studio d'animé!{% endblock %}
 
 {% block body %}
 <h1 class="pt-2 text-center">Liste des studio d'animation</h1>
@@ -12,7 +12,7 @@
       <div class="card border-primary mb-3" style="max-width: 20rem;">
         <div class="card-header">{{studioAnimation.Anime|length}} animé </div>
         <div class="card-body">
-          <h4 class="card-title">{{studioAnimation.nom}}</h4>
+          <h4 class="card-title">{{studioAnimation.nomStudio}}</h4>
         </div>
       </div>
     </div>

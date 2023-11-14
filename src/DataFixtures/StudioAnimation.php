@@ -15,10 +15,10 @@ class StudioAnimation extends Fixture
         $faker=Factory::create('fr_FR');
         for($i=1;$i<=10;$i++)
         {
-            $studioObjet=new StudioAnimation();
             $studio=new StudioDanimation();
             $studio->setNomStudio($faker->words(2, true));
+            $manager->persist($studio);
         }
-        $manager->persist($studioObjet);
+        $manager->flush();
     }
 }
