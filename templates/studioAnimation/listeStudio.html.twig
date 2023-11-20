@@ -3,7 +3,7 @@
 {% block title %}Studio d'animé!{% endblock %}
 
 {% block body %}
-<h1 class="pt-2 text-center">Liste des studio d'animation</h1>
+<h1 class="pt-2 text-center">Liste des studios d'animation</h1>
 <hr>
 <div class="row pt-2">
   {% for studioAnimation in listeStudioAnimation %}
@@ -18,5 +18,8 @@
     </div>
   </div>  
   {% endfor %}
+  <div class="navigation mx-auto">
+    {{ knp_pagination_render(listeStudioAnimation) }}
+  </div>
 </div> 
 {% endblock %}
