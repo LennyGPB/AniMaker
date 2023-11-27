@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello listeAnimeController!{% endblock %}
+
+{% block body %}
+
+<a href="{{path('admin_anime_ajout')}}">Ajout un anime</a>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nom de l'anime</th>
+        <th scope="col">Type</th>
+        <th scope="col">Catégorie</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for anime in lesAnimes %} 
+      <tr>
+        <th scope="row">{{ anime.id }}</th>
+        <td>{{ anime.nom }}</td>
+        <td>{{ anime.type }}</td>
+        <td>
+          {% for categorie in anime.categories %}
+            {{ categorie.nom }}
+            {# Si vous voulez ajouter une virgule après chaque catégorie, sauf la dernière #}
+            {% if not loop.last %}, {% endif %}
+          {% endfor %}
+        </td>
+        <td>
+          <a href="{{ path("admin_anime_modif", {'id': anime.id}) }}">Modifier</a>
+          <a href="{{ path('admin_anime_supp', {'id' : anime.id}) }}">Supprimer</a>
+        </td>
+      </tr>
+    {% endfor %}
+    
+    </tbody>
+  </table>
+  
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout Anime{% endblock %}
+
+{% block body %}
+
+<!-- Mettre le formulaire & préciser son nom définit par le controller -->
+{{form_start(formAnime)}}
+
+<!-- form_row = met tout les champs qu'il y a dans le formulaire -->
+{{form_row(formAnime)}}
+
+<!-- Ajouter un bouton valider  -->
+<input type="submit" value="valider">
+<a href="" class="btn btn-warning">Annuler</a>
+
+{{form_end(formAnime)}}
+
+
+{% endblock %}

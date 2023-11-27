@@ -2,3 +2,24 @@
 
 {% block title %}Liste des Animés{% endblock %}
 
+{% block body %}
+
+
+
+<div class="container">
+  <div class="row">
+    {% for anime in lesAnimes %}
+    <div class="col-md-3">
+      <div class="card custom-card">
+        <div class="card-img" style="background-image: url('assets/images/fireforce.jpg')"></div>
+        <div class="card-title">
+          <h6> {{anime.nom}} </h6>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+{% endblock  %}

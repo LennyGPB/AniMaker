@@ -1,0 +1,29 @@
+.custom-card {
+    width: 14rem; /* Ajustez la largeur selon vos besoins */
+    height: 350px; /* Ajustez la hauteur selon vos besoins */
+    margin: 10px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    display: inline-block; 
+    transition-duration: 0.5s;
+  }
+
+  .custom-card:hover {
+    transform: scale(1.05); /* Ajout de l'effet de survol */
+  }
+
+  .custom-card .card-img {
+    height: 250px; /* Ajustez la hauteur selon vos besoins */
+    background-size: cover;
+    background-position: center;
+    transition-duration: 0.5s;
+  }
+
+  .custom-card .card-img:hover{
+    opacity: 0.4;
+  }
+
+  .custom-card .card-title {
+    padding: 10px;
+  }
