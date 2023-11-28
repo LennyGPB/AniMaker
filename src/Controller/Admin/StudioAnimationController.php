@@ -49,7 +49,7 @@ class StudioAnimationController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/studio_animation/supprimer/{id}', name: 'admin_studioAnimation_supprimer', methods:['DELETE'])]
+    #[Route('/admin/studio_animation/supprimer/{id}', name: 'admin_studioAnimation_supprimer', methods:['GET'])]
     public function supprimerStudioAnimation(StudioDanimation $studio, EntityManagerInterface $manager)
     {
             $manager->remove($studio);
