@@ -28,7 +28,8 @@ class StudioDanimationRepository extends ServiceEntityRepository
    public function listeStudioAnimationComplete(): ?Query
    {
        return $this->createQueryBuilder('s')
-            ->select('s')
+            ->select('s', 'a')
+            ->leftJoin('s.Anime', 'a')
             ->orderBy('s.nomStudio', 'ASC')
             ->getQuery()
        ;
