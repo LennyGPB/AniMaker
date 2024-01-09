@@ -42,7 +42,7 @@ class Anime
     #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'anime')]
     private Collection $categories;
 
-    #[ORM\ManyToMany(targetEntity: StudioDanimation::class, mappedBy: 'Anime')]
+    #[ORM\ManyToMany(targetEntity: StudioDanimation::class, mappedBy: 'Anime', cascade: ['persist'])]
     private Collection $studioDanimations;
 
     public function __construct()

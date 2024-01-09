@@ -21,11 +21,14 @@ class StudioAnimationType extends AbstractType
                     "placeholder"=>"saisir le nom du studio d'animation"
                 ]
             ])
-            // ->add('Anime', EntityType::class, [
-            //     'class'=>Anime::class,
-            //     'choice_label'=>'nom'
+            ->add('Anime', EntityType::class, [
+                'class'=>Anime::class,
+                'choice_label'=>'nom',
+                'multiple'=>true, 
+                'by_reference'=>false,
+                'expanded'=>true
 
-            // ])
+            ])
         ;
     }
 
