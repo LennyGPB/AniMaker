@@ -13,10 +13,11 @@ class StudioAnimation extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker=Factory::create('fr_FR');
-        for($i=1;$i<=100;$i++)
+        for($i=1;$i<=10;$i++)
         {
             $studio=new StudioDanimation();
             $studio->setNomStudio($faker->words(2, true));
+            $manager->persist($studio);
         }
         $manager->flush();
     }

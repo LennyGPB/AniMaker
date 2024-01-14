@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\StudioDanimation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,20 +22,18 @@ class StudioDanimationRepository extends ServiceEntityRepository
         parent::__construct($registry, StudioDanimation::class);
     }
 
-//    /**
-//     * @return StudioDanimation[] Returns an array of StudioDanimation objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return StudioDanimation[] Returns an array of StudioDanimation objects
+    */
+   public function listeStudioAnimationComplete(): ?Query
+   {
+       return $this->createQueryBuilder('s')
+            ->select('s', 'a')
+            ->leftJoin('s.Anime', 'a')
+            ->orderBy('s.nomStudio', 'ASC')
+            ->getQuery()
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?StudioDanimation
 //    {
