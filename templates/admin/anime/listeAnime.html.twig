@@ -1,43 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello listeAnimeController!{% endblock %}
+{% block title %}Admin - Anime{% endblock %}
 
 {% block body %}
 
-<a href="{{path('admin_anime_ajout')}}">Ajout un anime</a>
+<h1 class="text-3xl text-white text-center font-bold uppercase mt-5">Administration des Animés </h1>
+<div class="flex flex-col bg-purple-700 rounded-md w-40 justify-center mx-auto m-3 p-1 hover:bg-purple-500 transition duration-500">
+<a href="{{path('admin_anime_ajout')}}" class="text-lg text-white text-center">Ajouter un anime</a>
+</div>
 
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Nom de l'anime</th>
-        <th scope="col">Type</th>
-        <th scope="col">Catégorie</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for anime in lesAnimes %} 
-      <tr>
-        <th scope="row">{{ anime.id }}</th>
-        <td>{{ anime.nom }}</td>
-        <td>{{ anime.type }}</td>
-        <td>
-          {% for categorie in anime.categories %}
-            {{ categorie.nom }}
-            {# Si vous voulez ajouter une virgule après chaque catégorie, sauf la dernière #}
-            {% if not loop.last %}, {% endif %}
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg m-8">
+  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-purple-700 dark:bg-purple-700 dark:text-white">
+          <tr>
+              <th scope="col" class="px-6 py-3">
+                  ID
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Nom de l'Anime
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Type
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Catégorie
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Action
+              </th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for anime in lesAnimes %} 
+          <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {{ anime.id }}
+              </th>
+              <td class="px-6 py-4">
+                {{ anime.nom }}
+              </td>
+              <td class="px-6 py-4">
+                {{ anime.type }}
+              </td>
+              <td class="px-6 py-4">
+                  $2999
+              </td>
+              <td class="px-6 py-4">
+                  <a href="{{path('admin_anime_modif', {'id': anime.id})}}" class="font-medium text-blue-600 dark:text-purple-700 hover:underline">Modifier</a>
+                  <a href="{{path('admin_anime_supp', {'id': anime.id})}}" class="font-medium text-blue-600 dark:text-purple-600 hover:underline">Supprimer</a>
+              </td>
+          </tr>
           {% endfor %}
-        </td>
-        <td>
-          <a href="{{ path("admin_anime_modif", {'id': anime.id}) }}">Modifier</a>
-          <a href="{{ path('admin_anime_supp', {'id' : anime.id}) }}">Supprimer</a>
-        </td>
-      </tr>
-    {% endfor %}
-    
-    </tbody>
+      </tbody>
   </table>
+</div>
+
   
 
 {% endblock %}

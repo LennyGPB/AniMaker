@@ -4,46 +4,101 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.min.css">
+        {% block stylesheets %}{% endblock %}
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css"  rel="stylesheet" />
         <link rel="stylesheet" href="css/style.css">
         
-        {% endblock %}
-
-
         {% block javascripts %}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         {% endblock %}
     </head>
-    <body>
-        
-        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="{{path('home')}}">AniMaker</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav me-auto">
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{path('listeAnime')}}">Liste des Animés</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Liste des Films</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="{{path("admin_liste_anime")}}">Gestion des Animés</a>
-                      <a class="dropdown-item" href="#">Gestion des Films d'animation</a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+    <body class="bg-black">
+
+    <nav class="bg-white border-gray-200 dark:bg-black">
+      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <a href="{{path('home')}}" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src="{{ asset('assets/images/logo.png') }}" class="mt-1 h-12 hover:scale-110 transition-transform duration-700" alt="Animaker Logo" />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">AniMaker</span>
+      </a>
+      
+            
+      <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+
+        {% if app.user %}
+          <p class="text-white text-md mr-3"> {{app.user.pseudo}}  </p>
+          <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-purple-600 dark:focus:ring-purple-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+            <span class="sr-only">Open user menu</span>
+            <img class="w-10 h-10 hover:scale-110 transition-transform duration-700 rounded-full" src="{{ asset('assets/images/fireforce.jpg') }}" alt="user photo">
+          </button>
+
+          <!-- Dropdown menu -->
+          <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-black border border-purple-600 dark:divide-gray-600" id="user-dropdown">
+            <div class="px-4 py-3">
+              <span class="block text-sm text-purple-600 dark:text-white"> {{app.user.pseudo}} </span>
+
             </div>
-          </nav>
+            <ul class="py-2" aria-labelledby="user-menu-button">
+              <li>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profil</a>
+              </li>
+              <li>
+                <a href="{{path('app_logout')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Se déconnecter</a>
+              </li>
+              <li>
+            </ul>
+          </div>
+          <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+            </svg>
+        </button>
+
+        {% else %}
+
+        <a href="{{path('app_login')}}" class="text-white bg-purple-600 p-2 rounded-lg text-md mr-3 font-bold"> Se connecter </a>
+        <a href="{{path('app_register')}}" class="text-white bg-purple-600 p-2 rounded-lg text-md font-bold"> S'inscrire </a>
+
+
+        {% endif %}
+
+      </div>
+      <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
+        <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-black md:dark:bg-black dark:border-gray-700">
+          <li>
+            <a href="{{path('home')}}" class="block py-2 px-3 text-white bg-teal-200 rounded md:bg-transparent md:text-purple-600  md:p-0 md:dark:text-purple-600 font-bold" aria-current="page">Home</a>
+          </li>
+          <li>
+            <a href="{{path('listeAnime')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-600  md:p-0 dark:text-white md:dark:hover:text-purple-600  dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 font-bold transition duration-500">Liste des Animés</a>
+          </li>
+          <li>
+            <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-600  md:p-0 dark:text-white md:dark:hover:text-purple-600  dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 font-bold transition duration-500">Liste des Films</a>
+          </li>
+          {% if app.user and is_granted('ROLE_ADMIN') %}
+          <li>
+            <a href="#" id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-600  md:p-0 dark:text-white md:dark:hover:text-purple-600  dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 font-bold transition duration-500">Administration</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      </div>
+
+      <!-- Dropdown menu -->
+      <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 border border-purple-600 dark:bg-black">
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+          <li>
+            <a href="{{path('admin_liste_anime')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-purple-600 dark:hover:text-white">Gestion des Animés</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-purple-600 dark:hover:text-white">Gestion des studios</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
           {% block body %}
           {% endblock %}
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
     </body>
 </html>
